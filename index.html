@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boise Crime Map - Interactive Dashboard</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="map"></div>
+
+        <div id="overlay">
+            <div id="header">
+                <h1>Boise Crime Map</h1>
+                <p class="subtitle">Hover over the map to explore crime density</p>
+            </div>
+
+            <div id="stats-panel">
+                <div id="focus-stats">
+                    <div class="stat-large">
+                        <span id="crime-count">0</span>
+                        <span class="stat-label">Crimes in Focus</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-item">
+                            <span id="radius-display">0.5</span>
+                            <span class="stat-label">Mile Radius</span>
+                        </div>
+                        <div class="stat-item">
+                            <span id="felony-count">0</span>
+                            <span class="stat-label">Felonies</span>
+                        </div>
+                        <div class="stat-item">
+                            <span id="misdemeanor-count">0</span>
+                            <span class="stat-label">Misdemeanors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="crime-breakdown">
+                    <h3>Top Crime Types</h3>
+                    <div id="crime-types-list"></div>
+                </div>
+            </div>
+
+            <div id="controls">
+                <div class="control-group">
+                    <label for="radius-slider">Focus Radius</label>
+                    <input type="range" id="radius-slider" min="0.1" max="2" step="0.1" value="0.5">
+                </div>
+                <div class="control-group">
+                    <label for="crime-filter">Crime Type</label>
+                    <select id="crime-filter">
+                        <option value="all">All Crimes</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="severity-filter">Severity</label>
+                    <select id="severity-filter">
+                        <option value="all">All</option>
+                        <option value="Felony">Felony</option>
+                        <option value="Misdemeanor">Misdemeanor</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="legend">
+                <h4>Crime Density</h4>
+                <div class="legend-gradient"></div>
+                <div class="legend-labels">
+                    <span>Low</span>
+                    <span>High</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="tooltip"></div>
+        <div id="focus-circle"></div>
+
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>Loading crime data...</p>
+        </div>
+
+        <div id="footer">
+            <p>Data: <a href="https://city-of-boise.opendata.arcgis.com/datasets/boise::bpd-crimes/" target="_blank">Boise Police Department</a> | Updated Daily</p>
+        </div>
+    </div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
