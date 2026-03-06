@@ -209,6 +209,17 @@ function setupEventListeners() {
     const radiusSlider = document.getElementById('radius-slider');
     const crimeFilter = document.getElementById('crime-filter');
     const severityFilter = document.getElementById('severity-filter');
+    const toggleHeatmap = document.getElementById('toggle-heatmap');
+    const togglePoints = document.getElementById('toggle-points');
+
+    // Layer visibility toggles
+    toggleHeatmap.addEventListener('change', (e) => {
+        map.setLayoutProperty('crimes-heat', 'visibility', e.target.checked ? 'visible' : 'none');
+    });
+
+    togglePoints.addEventListener('change', (e) => {
+        map.setLayoutProperty('crimes-point', 'visibility', e.target.checked ? 'visible' : 'none');
+    });
 
     // Radius slider
     radiusSlider.addEventListener('input', (e) => {
