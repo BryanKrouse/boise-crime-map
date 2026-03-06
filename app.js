@@ -160,10 +160,20 @@ function setupMapLayers() {
                 16, 6
             ],
             'circle-color': [
-                'match', ['get', 'Severity'],
-                'Felony', '#ff4444',
-                'Misdemeanor', '#ffa500',
-                '#ff6b6b'
+                'match', ['get', 'CrimeCodeGroup'],
+                'THEFT', '#ff6b6b',           // Red
+                'ASSAULT', '#ff4444',          // Dark Red
+                'BURGLARY', '#ffa500',         // Orange
+                'VANDALISM', '#ffdd57',        // Yellow
+                'FRAUD', '#48c774',            // Green
+                'DRUG/NARCOTIC', '#00d1b2',    // Teal
+                'VEHICLE THEFT', '#3298dc',    // Blue
+                'ROBBERY', '#b86bff',          // Purple
+                'WEAPONS', '#ff85c0',          // Pink
+                'DUI', '#f14668',              // Crimson
+                'TRESPASS', '#7957d5',         // Violet
+                'DISORDERLY CONDUCT', '#ffe08a', // Light Yellow
+                '#888888'                      // Gray fallback
             ],
             'circle-stroke-color': '#fff',
             'circle-stroke-width': 1,
