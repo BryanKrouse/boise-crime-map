@@ -12,6 +12,29 @@ const CONFIG = {
     recordLimit: 10000, // Max records to fetch per request
 };
 
+// Color mapping for crime types (must match actual API values)
+const CRIME_COLORS = {
+    'Larceny/Theft Offenses': '#ff6b6b',
+    'Assault Offenses': '#ff4444',
+    'Burglary/Breaking and Entering': '#ffa500',
+    'Destruction/Damage/Vandalism of Property': '#ffdd57',
+    'Fraud Offenses': '#48c774',
+    'Drug/Narcotic Offenses': '#00d1b2',
+    'Motor Vehicle Theft': '#3298dc',
+    'Robbery': '#b86bff',
+    'Weapon Law Violations': '#ff85c0',
+    'Sex Offenses, Forcible': '#f14668',
+    'Counterfeiting/Forgery': '#7957d5',
+    'Stolen Property Offenses': '#ffe08a',
+    'Embezzlement': '#3273dc',
+    'Kidnapping/Abduction': '#ff3860',
+    'Arson': '#ff7849',
+    'Extortion/Blackmail': '#9966cc',
+    'Pornography/Obscene Material': '#c9510c'
+};
+
+const DEFAULT_COLOR = '#888888';
+
 let map;
 let crimeData = [];
 let filteredData = [];
@@ -161,19 +184,22 @@ function setupMapLayers() {
             ],
             'circle-color': [
                 'match', ['get', 'CrimeCodeGroup'],
-                'THEFT', '#ff6b6b',           // Red
-                'ASSAULT', '#ff4444',          // Dark Red
-                'BURGLARY', '#ffa500',         // Orange
-                'VANDALISM', '#ffdd57',        // Yellow
-                'FRAUD', '#48c774',            // Green
-                'DRUG/NARCOTIC', '#00d1b2',    // Teal
-                'VEHICLE THEFT', '#3298dc',    // Blue
-                'ROBBERY', '#b86bff',          // Purple
-                'WEAPONS', '#ff85c0',          // Pink
-                'DUI', '#f14668',              // Crimson
-                'TRESPASS', '#7957d5',         // Violet
-                'DISORDERLY CONDUCT', '#ffe08a', // Light Yellow
-                '#888888'                      // Gray fallback
+                'Larceny/Theft Offenses', '#ff6b6b',
+                'Assault Offenses', '#ff4444',
+                'Burglary/Breaking and Entering', '#ffa500',
+                'Destruction/Damage/Vandalism of Property', '#ffdd57',
+                'Fraud Offenses', '#48c774',
+                'Drug/Narcotic Offenses', '#00d1b2',
+                'Motor Vehicle Theft', '#3298dc',
+                'Robbery', '#b86bff',
+                'Weapon Law Violations', '#ff85c0',
+                'Sex Offenses, Forcible', '#f14668',
+                'Counterfeiting/Forgery', '#7957d5',
+                'Stolen Property Offenses', '#ffe08a',
+                'Embezzlement', '#3273dc',
+                'Kidnapping/Abduction', '#ff3860',
+                'Arson', '#ff7849',
+                '#888888'
             ],
             'circle-stroke-color': '#fff',
             'circle-stroke-width': 1,
@@ -336,13 +362,16 @@ function updateCrimeBreakdown(crimes) {
     const maxCount = sorted.length > 0 ? sorted[0][1] : 1;
     const container = document.getElementById('crime-types-list');
 
-    container.innerHTML = sorted.map(([type, count]) => `
+    container.innerHTML = sorted.map(([type, count]) => {
+        const color = CRIME_COLORS[type] || DEFAULT_COLOR;
+        return `
         <div class="crime-type-item">
             <span class="crime-type-count">${count}</span>
-            <div class="crime-type-bar" style="width: ${(count / maxCount) * 100}px"></div>
+            <div class="crime-type-bar" style="width: ${(count / maxCount) * 100}px; background: ${color}"></div>
             <span class="crime-type-name" title="${type}">${formatCrimeType(type)}</span>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 function formatCrimeType(type) {

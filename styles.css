@@ -141,7 +141,6 @@ body {
 
 .crime-type-bar {
     height: 6px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa500);
     border-radius: 3px;
     min-width: 4px;
     transition: width 0.3s ease;
