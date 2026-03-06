@@ -3,7 +3,7 @@
 
 const CONFIG = {
     // Get your free Mapbox token at https://mapbox.com/ and replace below
-    mapboxToken: 'YOUR_MAPBOX_TOKEN_HERE',
+    mapboxToken: 'pk.eyJ1IjoiYnJ5YW5tYXBwaW5nIiwiYSI6ImNtbWZlZTB2MDA2dWUycHBvNjliY2VvOWoifQ.rwirftQtAdza2bHezhlRCA',
     apiUrl: 'https://services1.arcgis.com/WHM6qC35aMtyAAlN/arcgis/rest/services/BPD_Crimes_Public/FeatureServer/0/query',
     boiseBounds: [-116.35, 43.52, -116.1, 43.72],
     boiseCenter: [-116.2, 43.615],
